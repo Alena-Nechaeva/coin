@@ -44,6 +44,7 @@ export default function LogInPage() {
 
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<yup.InferType<typeof schemaLogIn>>({
@@ -77,6 +78,11 @@ export default function LogInPage() {
     if (token) router.push('/');
   }, [router]);
 
+  useEffect(() => {
+    setValue('login', 'developer')
+    setValue('password', '123456')
+  }, [setValue]);
+
   return (
     <Container component='main' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '93vh' }}>
       <Paper elevation={6} sx={{ maxWidth: '32rem', backgroundColor: 'grey.100', padding: '3.125rem', borderRadius: '50px' }}>
@@ -95,7 +101,7 @@ export default function LogInPage() {
                   render={({ field: { value, onChange } }) => (
                     <TextField
                       fullWidth
-                      value={value || ''}
+                      value='developer'
                       label='Name'
                       onChange={onChange}
                       placeholder='Name'
@@ -121,7 +127,7 @@ export default function LogInPage() {
                       <OutlinedInput
                         fullWidth
                         id='inputPassword'
-                        value={value || ''}
+                        value='123456'
                         label='Password'
                         onChange={onChange}
                         placeholder='Name'
